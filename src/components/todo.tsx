@@ -8,7 +8,7 @@ interface props {
   onFinish: (index: number) => void;
 }
 
-const todo = ({ todo, onDelete, onFinish }: props) => {
+const Todo = ({ todo, onDelete, onFinish }: props) => {
   return (
     <Wrapper>
       <div className={todo.done ? 'todo done' : 'todo'}>
@@ -71,4 +71,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default todo;
+export default Todo;
