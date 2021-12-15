@@ -1,6 +1,6 @@
 import React from 'react';
-import Todo from './todo';
-import { addTodo, changeInput, finishTodo, deleteTodo } from '../actions/todoAction';
+import Todo from '../todo';
+import { addTodo, changeInput, finishTodo, deleteTodo } from '../../actions/todoAction';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state: any) => ({

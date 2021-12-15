@@ -1,13 +1,18 @@
 import { ADD_TODO, DELETE_TODO, FINISH_TODO, CHANGE_TODO } from '../constants/action-type';
 
-interface state {
-  todos: { no: number; title: string; done: boolean }[];
+export interface Todo {
+  no: number;
+  title: string;
+  done: boolean;
+}
+interface State {
+  todos: Todo[];
   input: {
-    title: any;
+    title: string;
   };
 }
 
-const initialState: state = {
+const initialState: State = {
   todos: [
     {
       no: 0,
@@ -18,14 +23,17 @@ const initialState: state = {
   input: { title: '' },
 };
 
-const todoReducer = (state = initialState, action: { type: string; payload: any }) => {
-  switch (action.type) {
+// 限制payload类型
+const todoReducer = (state = initialState, action: { type: string; payload: object }) => {
+  const { type, payload } = action;
+  switch (type) {
     case ADD_TODO: {
       let newTodos = state.todos;
       const length = newTodos.length;
       newTodos.push({
+        ...(payload as { todo: Todo }).todo,
         no: length,
-        ...action.payload.todo,
+        // 结构以后后面的值要覆盖前面的
       });
       return {
         ...state,
@@ -34,7 +42,7 @@ const todoReducer = (state = initialState, action: { type: string; payload: any 
     }
     case FINISH_TODO: {
       const toggleTodo = state.todos.find((todo) => {
-        return todo.no === action.payload.index;
+        return todo.no === (payload as { index: number }).index;
       });
       const cloneTodos = state.todos;
       if (toggleTodo) {
@@ -47,7 +55,7 @@ const todoReducer = (state = initialState, action: { type: string; payload: any 
     }
     case DELETE_TODO: {
       const toggleTodo = state.todos.find((todo) => {
-        return todo.no === action.payload.index;
+        return todo.no === (payload as { index: number }).index;
       });
       const cloneTodos = state.todos;
       if (toggleTodo) {
@@ -65,7 +73,7 @@ const todoReducer = (state = initialState, action: { type: string; payload: any 
       return {
         ...state,
         input: {
-          title: action.payload.input,
+          title: (payload as { input: string }).input,
         },
       };
     }

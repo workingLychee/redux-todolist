@@ -7,7 +7,7 @@ interface SignupProps {
       input: any;
     }
 
-const SignupForm:React.FC<SignupProps> = ({onClick, onInput, input}) => {
+const SignupForm:React.FC<SignupProps> = ({onClick}) => {
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
   const formik = useFormik({
@@ -22,7 +22,7 @@ const SignupForm:React.FC<SignupProps> = ({onClick, onInput, input}) => {
     <form onSubmit={formik.handleSubmit}>
       <label htmlFor="title">待办事项</label>
       <input
-        placeholder="请输入代办事项"
+        placeholder="请输入待办事项"
         id="title"
         name="title"
         type="title"

@@ -1,6 +1,6 @@
 import { ADD_TODO, DELETE_TODO, FINISH_TODO, CHANGE_TODO } from '../constants/action-type';
 
-export const addTodo = (todo: any) => {
+export const addTodo = (todo: { title: string; done: boolean }) => {
   return {
     type: ADD_TODO,
     payload: {

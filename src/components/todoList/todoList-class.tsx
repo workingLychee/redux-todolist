@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTodo, changeInput, finishTodo, deleteTodo } from '../actions/todoAction';
-import Todo from './todo';
-import SignupForm from './formik';
+import { addTodo, changeInput, finishTodo, deleteTodo } from '../../actions/todoAction';
+import Todo from '../todo';
+import SignupForm from '../signupForm';
 import './todoList.scss';
 
 interface TodoProps {
@@ -21,18 +21,18 @@ export class TodoList extends Component<TodoProps, TodoState> {
     let { onClick, onInput, onDelete, onFinish, todos, input } = this.props;
     return (
       <div className='todoList'>
-        {/* <div className='input'>
+        <div className='input'>
           <input
             type='text'
-            placeholder='请输入代办事项'
+            placeholder='请输入待办事项'
             value={input.title}
             onChange={(e: any) => {
               onInput(e.target.value);
             }}
           />
           <button onClick={() => onClick(input)}>ADD</button>
-        </div> */}
-        <SignupForm onClick={onClick} onInput={onInput} input={input}/>
+        </div>
+        {/* <SignupForm onClick={onClick} onInput={onInput} input={input}/> */}
         {todos.map((todo: any) => (
           <Todo key={todo.no} todo={todo} onDelete={onDelete} onFinish={onFinish} />
         ))}
